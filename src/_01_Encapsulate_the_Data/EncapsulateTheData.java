@@ -1,9 +1,11 @@
 package _01_Encapsulate_the_Data;
 
+import java.awt.Robot;
+
 public class EncapsulateTheData {
 
 	// 1. Encapsulate all the members.
-
+		
 	// 2. Implement the setter restrictions described above each member variable.
 
 	// 3. Pass all the JUnit tests.
@@ -12,17 +14,37 @@ public class EncapsulateTheData {
 	 * All negative arguments should set itemsReceived to 0.
 	 */
 
-	int itemsReceived;
-
+	private int itemsReceived;
+	public int setItemsReceived(int rpn) {
+		if (itemsReceived < 0) {
+			itemsReceived = 0;
+		} else {
+			itemsReceived = rpn;
+		}
+		return itemsReceived;
+	}
+	public int getItemsReceived() {
+		return itemsReceived;
+}
 	/*
 	 * degreesTurned must be locked between 0.0 and 360.0 inclusive.
 	 * 
 	 * All parameters outside this range should set degreesTurned to the nearest
 	 * bound.
 	 */
+	private double degreesTurned;
+	public double setDegreesTurned(double d) {
+		if (degreesTurned > 0 && degreesTurned <= 360) {
+			degreesTurned = d;
+			
+		}
+		return degreesTurned;
 
-	double degreesTurned;
+	}
 
+	public double getDegreesTurned() {
+		return degreesTurned;
+	}
 	/*
 	 * nomenclature must not contain an empty String.
 	 * 
@@ -30,8 +52,21 @@ public class EncapsulateTheData {
 	 * space.
 	 */
 
-	String nomenclature;
+	private String nomenclature;
+	public String setNomenclature(String str) {
+		if (str == "") {
+			nomenclature = " ";
+		} else  if (nomenclature == "") {
+			nomenclature = str;
+		} else {
+			nomenclature = str;
+		}
+		return nomenclature;
 
+	}
+	public String getNomenclature() {
+		return nomenclature;
+	}
 	/*
 	 * memberObj must not be a String.
 	 * 
@@ -48,6 +83,21 @@ public class EncapsulateTheData {
 	 * System.out.println(rob instanceof Random); //prints false
 	 */
 
-	Object memberObj;
+	private Object memberObj;
+	public Object setMemberObj(Object mo) {
+		memberObj = new Object();
+		if (memberObj instanceof String) {
+			return false;
+		} else if (memberObj instanceof Object) {
+			memberObj = mo;
+			return memberObj;
+		} else {
+			System.out.println("nothing happened");
+			return false;
+		}
 
+	}
+	public Object getMemberObj() {
+		return memberObj;
+	}
 }

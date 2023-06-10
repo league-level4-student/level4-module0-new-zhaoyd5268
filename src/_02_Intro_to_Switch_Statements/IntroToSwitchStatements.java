@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 public class IntroToSwitchStatements {
 	public static void main(String[] args) {
 
-		/*
+		/*    
 		 * A Switch Statement is an alternative to writing an if-else statement that can
 		 * only check against a single value of type: byte, Byte, short, Short, int,
 		 * Integer, char, Character, String or enum(explained next section).
