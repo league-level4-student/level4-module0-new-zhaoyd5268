@@ -15,13 +15,12 @@ public class EncapsulateTheData {
 	 */
 
 	private int itemsReceived;
-	public int setItemsReceived(int rpn) {
-		if (itemsReceived < 0) {
+	public void setItemsReceived(int rpn) {
+		if (rpn < 0) {
 			itemsReceived = 0;
 		} else {
 			itemsReceived = rpn;
 		}
-		return itemsReceived;
 	}
 	public int getItemsReceived() {
 		return itemsReceived;
@@ -33,12 +32,10 @@ public class EncapsulateTheData {
 	 * bound.
 	 */
 	private double degreesTurned;
-	public double setDegreesTurned(double d) {
-		if (degreesTurned > 0 && degreesTurned <= 360) {
+	public void setDegreesTurned(double d) {
+		if (d > 0 && d <= 360) {
 			degreesTurned = d;
-			
 		}
-		return degreesTurned;
 
 	}
 
@@ -53,7 +50,7 @@ public class EncapsulateTheData {
 	 */
 
 	private String nomenclature;
-	public String setNomenclature(String str) {
+	public void setNomenclature(String str) {
 		if (str == "") {
 			nomenclature = " ";
 		} else  if (nomenclature == "") {
@@ -61,8 +58,6 @@ public class EncapsulateTheData {
 		} else {
 			nomenclature = str;
 		}
-		return nomenclature;
-
 	}
 	public String getNomenclature() {
 		return nomenclature;
@@ -84,18 +79,10 @@ public class EncapsulateTheData {
 	 */
 
 	private Object memberObj;
-	public Object setMemberObj(Object mo) {
-		memberObj = new Object();
-		if (memberObj instanceof String) {
-			return false;
-		} else if (memberObj instanceof Object) {
-			memberObj = mo;
-			return memberObj;
-		} else {
-			System.out.println("nothing happened");
-			return false;
+	public void setMemberObj(Object o) {
+		if (!(o instanceof String)) {
+			memberObj = o;
 		}
-
 	}
 	public Object getMemberObj() {
 		return memberObj;
