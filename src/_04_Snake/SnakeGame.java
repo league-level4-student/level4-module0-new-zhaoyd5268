@@ -110,6 +110,24 @@ public class SnakeGame implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
+		switch (e.getKeyCode()) {
+
+		case KeyEvent.VK_UP:
+			snake.setDirection(Direction.UP);
+			break;
+		case KeyEvent.VK_DOWN:
+			snake.setDirection(Direction.DOWN);
+			break;
+		case KeyEvent.VK_LEFT:
+			snake.setDirection(Direction.LEFT);
+			break;
+		case KeyEvent.VK_RIGHT:
+			snake.setDirection(Direction.RIGHT);
+			break;
+		default:
+			System.out.println("your mom");
+		}
+
 		/*
 		 * Use a switch statement to determine if an arrow key is pressed, and set the
 		 * snake's direction accordingly.
@@ -125,50 +143,64 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * Create a new Location object that is set to a random x and y values between 0
 		 * and the WIDTH and HEIGHT variables respectively.
 		 */
-
-
+		Random ran = new Random();
+		Location l = new Location(ran.nextInt(WIDTH), ran.nextInt(HEIGHT));
 		/*
 		 * Set the foodLocation equal to the Location object you just created.
 		 * 
 		 * Hint: Use the snake's isLocationOnSnake method to make sure you don't put the
 		 * food on top of the snake.
 		 */
+		if (snake.isLocationOnSnake(l) == false) {
+
+			foodLocation = l;
+		}
 
 	}
 
 	private void gameOver() {
 
 		// Stop the timer.
-
+		timer.stop();
 		// Tell the user their snake is dead.
-
+		JOptionPane.showMessageDialog(null, "Your snake died. L bozo.");
 		// Ask the user if they want to play again.
-
-
+		int s = JOptionPane.showConfirmDialog(null, "Wanna play agin?", "The big choice", 0);
 		/*
 		 * If the user wants to play again, call the snake's resetLocation method and
 		 * this class's randomizeFoodLocation method then restart the timer. Otherwise,
 		 * exit the game.
 		 */
-
+		if (s == 0) {
+			snake.resetLocation();
+			randomizeFoodLocation();
+			timer.start();
+		} else {
+			window.setVisible(false);
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		// Call the snake's update method.
-
+		snake.update();
+		System.out.println(snake.getHeadLocation().getX());
+		System.out.println(snake.getHeadLocation().getY());
 		/*
 		 * If the snake's head is colliding with its own body or out of bounds call the
 		 * gameOver method.
 		 */
-
-
+		if (snake.isHeadCollidingWithBody()) {
+			gameOver();
+		}
 		/*
 		 * If the location of the snake's head is equal to the location of the food,
 		 * feed the snake and randomize the food location.
 		 */
-
+		if (snake.getHeadLocation() == foodLocation) {
+			snake.feed();
+			randomizeFoodLocation();
+		}
 		panel.repaint();
 	}
 }
