@@ -109,7 +109,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
+		System.out.println("asdfasdf");
 		switch (e.getKeyCode()) {
 
 		case KeyEvent.VK_UP:
@@ -152,10 +152,11 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * food on top of the snake.
 		 */
 		if (snake.isLocationOnSnake(l) == false) {
-
 			foodLocation = l;
+		} else {
+			Location b = new Location(ran.nextInt(WIDTH), ran.nextInt(HEIGHT));
+			foodLocation = b;
 		}
-
 	}
 
 	private void gameOver() {
@@ -165,7 +166,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		// Tell the user their snake is dead.
 		JOptionPane.showMessageDialog(null, "Your snake died. L bozo.");
 		// Ask the user if they want to play again.
-		int s = JOptionPane.showConfirmDialog(null, "Wanna play agin?", "The big choice", 0);
+		int s = JOptionPane.showConfirmDialog(null, "Wanna play again?", "The big choice", 0);
 		/*
 		 * If the user wants to play again, call the snake's resetLocation method and
 		 * this class's randomizeFoodLocation method then restart the timer. Otherwise,
@@ -192,12 +193,16 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 */
 		if (snake.isHeadCollidingWithBody()) {
 			gameOver();
+		} else if (snake.isOutOfBounds()) {
+			gameOver();
 		}
 		/*
 		 * If the location of the snake's head is equal to the location of the food,
 		 * feed the snake and randomize the food location.
 		 */
-		if (snake.getHeadLocation() == foodLocation) {
+		
+		if (snake.getHeadLocation().equals(foodLocation)) {
+			System.out.println("feeding");
 			snake.feed();
 			randomizeFoodLocation();
 		}

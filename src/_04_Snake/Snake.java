@@ -72,14 +72,15 @@ public class Snake {
 		 * Use a loop starting at the end of the ArrayList and stop before the head of
 		 * the snake (index 0) or you will go out of bounds.
 		 */
-		for (int i = snake.size(); i > 1; i--) {
-			snake.get(i).setLocation(snake.get(i).getLocation());
+		for (int i = snake.size()-1; i > 0; i--) {
+				snake.get(i).setLocation(snake.get(i-1).getLocation());
 		}
 		/*
 		 * Create a new Location object and initialize it with the values calculated in
 		 * the first step. Then set the head's location equal to the new location.
 		 */
 		Location loc = new Location(snakeX, snakeY);
+		head.setLocation(loc);
 		// Set the canMove member variable to true.
 		canMove = true;
 	}
@@ -171,9 +172,16 @@ public class Snake {
 		 * Complete the method so it returns true if the head of the snake is outside of
 		 * the window and false otherwise.
 		 */
-		if (head.getLocation().getX() > SnakeGame.WINDOW_WIDTH || head.getLocation().getX() < 0) {
+		if (head.getLocation().getX() > SnakeGame.WIDTH) {
 			return true;
-		} else if (head.getLocation().getY() < SnakeGame.WINDOW_HEIGHT || head.getLocation().getY() < 0) {
+		}
+		if (head.getLocation().getX() < 0) {
+			return true;
+		} 
+		if (head.getLocation().getY() > SnakeGame.HEIGHT) {
+			return true;
+		} 
+		if (head.getLocation().getY() < 0) {
 			return true;
 		} else {
 			return false;
